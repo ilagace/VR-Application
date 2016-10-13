@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <style type="text/css">
+  body {
+    margin: 0;
+  }
+
+  .gallery-item {
+    float: left;
+    display: inline;
+    padding: 0;
+    margin: 0;
+    max-height: 250px;
+  }
+
+  .preloader {
+    width: 0%;
+    height: 6px;
+    background: #d9681d;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+    -webkit-transition: height 0.25s ease-in;
+    -moz-transition: height 0.25s ease-in;
+    -ms-transition: height 0.25s ease-in;
+    -o-transition: height 0.25s ease-in;
+    transition: height 0.25s ease-in;
+  }
+  </style>
+  <title>google-panorama-equirectangular</title>
+</head>
+<body>
+  <div class="data"></div>
+  <div class="preloader"></div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAs0hh_PEE3g4IF7PbjA_W2xQG8BmcpU1I&v=3.25"></script>
+  <script src="jvs/jquery.js"></script>
+  <script src="jvs/init.js"></script>
+  <script src="jvs/model.js"></script>
+  <script src="jvs/stereo.js"></script>
+  <script src="jvs/bundle.js"></script>
+  <script src="jvs/stats.js"></script>
+  <script>
+    var stats = new Stats();
+    stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+    document.body.appendChild( stats.dom );
+
+    function animate() {
+
+        stats.begin();
+
+        // monitored code goes here
+
+        stats.end();
+
+        requestAnimationFrame( animate );
+
+    }
+
+    requestAnimationFrame( animate );
+  </script>
+</body>
+</html>

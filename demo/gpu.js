@@ -7,7 +7,7 @@
  */
 
 var url = require('url')
-var equirect = require('../intermediate')
+var equirect = require('../')
 var panorama = require('google-panorama-by-location')
 var awesome = require('awesome-streetview')
 var THREE = require('three')
@@ -24,10 +24,15 @@ var app = createOrbitViewer({
   position: new THREE.Vector3(0, 0, -0.1)
 })
 
-var tex = new THREE.DataTexture(null, 1, 1, THREE.RGBAFormat)
+//var tex = new THREE.DataTexture(null, 1, 1, THREE.RGBAFormat)
+var tex = new THREE.Texture()
 tex.minFilter = THREE.LinearFilter
-tex.magFilter = THREE.LinearFilter
+//tex.magFilter = THREE.LinearFilter
 tex.generateMipmaps = false
+
+var canvas = document.createElement('canvas')
+tex.needsUpdate = true
+tex.image = canvas
 
 // add a double-sided sphere
 var geo = new THREE.SphereGeometry(1, 84, 84)
@@ -53,7 +58,7 @@ window.addEventListener('hashchange', function (ev) {
 function start () {
   var location = awesome()
 
-  // allow deep-linking into a location :) 
+  // allow deep-linking into a location :)
   var hash = url.parse(window.location.href).hash
   var match = /^\#([0-9\-\.]+)\,([0-9\-\.]+)$/.exec(hash || '')
   if (match) {
@@ -73,11 +78,12 @@ function load (location) {
     if (err) throw err
     var renderer = app.renderer
 
+    // transparent canvas to start (white)
     // ensure handle is created
-    renderer.uploadTexture(tex)
+    // renderer.uploadTexture(tex)
 
-    var gl = renderer.getContext()
-    var handle = tex.__webglTexture
+    // var gl = renderer.getContext()
+    // var handle = tex.__webglTexture
     var texHeight
     var maxSize = gl.getParameter(gl.MAX_TEXTURE_SIZE)
     var zoom = Math.max(0, Math.min(4, bestZoom(maxSize)))
@@ -86,28 +92,33 @@ function load (location) {
     equirect(result.id, {
       zoom: zoom,
       tiles: result.tiles,
+      canvas: canvas,
       crossOrigin: 'Anonymous'
     }).on('start', function (data) {
       texHeight = data.height
 
       // reshape the texture initially with transparent data
-      gl.bindTexture(gl.TEXTURE_2D, handle)
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, data.width, data.height,
-            0, gl.RGBA, gl.UNSIGNED_BYTE, null)
+      // gl.bindTexture(gl.TEXTURE_2D, handle)
+      //gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, data.width, data.height,
+      //      0, gl.RGBA, gl.UNSIGNED_BYTE, null)
 
       // now we can show the sphere
+      tex.needsUpdate = true
       sphere.visible = true
     }).on('progress', function (ev) {
       var x = ev.position[0]
       var y = texHeight - ev.position[1] - ev.image.height
 
       // now blit the intermediate image
-      gl.bindTexture(gl.TEXTURE_2D, handle)
-      gl.texSubImage2D(gl.TEXTURE_2D, 0, x, y,
-            gl.RGBA, gl.UNSIGNED_BYTE, ev.image)
-
+      //gl.bindTexture(gl.TEXTURE_2D, handle)
+      //gl.texSubImage2D(gl.TEXTURE_2D, 0, x, y,
+      //      gl.RGBA, gl.UNSIGNED_BYTE, ev.image)
+      tex.needsUpdate = true
+      //console.log(ev)
       setProgress(ev.count / ev.total)
-    }).on('complete', function () {
+    }).on('complete', function (ev) {
+      console.log(ev)
+      tex.needsUpdate = true
       preloader.style.height = '0'
     })
   })

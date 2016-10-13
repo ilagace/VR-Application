@@ -1,0 +1,91 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "three-stereo-effect",
+        "scope": null,
+        "escapedName": "three-stereo-effect",
+        "name": "three-stereo-effect",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "D:\\Software Development Projects"
+    ]
+  ],
+  "_from": "three-stereo-effect@latest",
+  "_id": "three-stereo-effect@1.0.14",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/three-stereo-effect",
+  "_nodeVersion": "4.2.4",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/three-stereo-effect-1.0.14.tgz_1471620347888_0.8056974916253239"
+  },
+  "_npmUser": {
+    "name": "samsy",
+    "email": "samuel.honigstein@gmail.com"
+  },
+  "_npmVersion": "2.14.12",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "three-stereo-effect",
+    "scope": null,
+    "escapedName": "three-stereo-effect",
+    "name": "three-stereo-effect",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/three-stereo-effect/-/three-stereo-effect-1.0.14.tgz",
+  "_shasum": "88d4a19b0bd3a0dc375fdd5f5d5d592201c8de7f",
+  "_shrinkwrap": null,
+  "_spec": "three-stereo-effect",
+  "_where": "D:\\Software Development Projects",
+  "author": {
+    "name": "samsy"
+  },
+  "bugs": {
+    "url": "https://github.com/Samsy/three-stereo-effect/issues"
+  },
+  "dependencies": {},
+  "description": "stereo effect for three js ( VR ) ",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "88d4a19b0bd3a0dc375fdd5f5d5d592201c8de7f",
+    "tarball": "https://registry.npmjs.org/three-stereo-effect/-/three-stereo-effect-1.0.14.tgz"
+  },
+  "gitHead": "611c70badb418ea6c30dd8239206c52611840c6d",
+  "homepage": "https://github.com/Samsy/three-stereo-effect#readme",
+  "keywords": [
+    "vr",
+    "webgl",
+    "threejs",
+    "stereo"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "samsy",
+      "email": "samuel.honigstein@gmail.com"
+    }
+  ],
+  "name": "three-stereo-effect",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samsy/three-stereo-effect.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.14"
+}

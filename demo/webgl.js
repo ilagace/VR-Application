@@ -50,9 +50,11 @@ panorama(location, function (err, result) {
     zoom: getBestZoom()
   })
     .on('complete', function (image) {
+      console.log(image)
       texture.needsUpdate = true
     })
     .on('progress', function (ev) {
+      console.log(ev)
       texture.needsUpdate = true
     })
 })
